@@ -1,0 +1,55 @@
+### QA Summary Report
+
+#### Test Case 1: `test_create_game`
+**Objective:** Verify that the `/games` endpoint correctly creates a new game when a POST request is made.
+
+**Expected Outcome:** 
+- The status code returned is `201 Created`.
+- The response JSON contains an `id` field.
+
+**Test Execution:**
+- The test makes a POST request to `/games`.
+- Upon a successful request, the response status code is checked to be `201`.
+- The response JSON is checked for the presence of an `id` field.
+
+**Outcome:** The test case passes if the response status code is `201` and contains the `id` field.
+
+#### Test Case 2: `test_get_game`
+**Objective:** Verify that the `/games/<int:game_id>` endpoint correctly retrieves a game when a GET request is made.
+
+**Expected Outcome:** 
+- The status code returned is `200 OK`.
+- The response JSON contains `board`, `turn`, `winner`, and `moves` fields.
+
+**Test Execution:**
+- A game is created and committed to the in-memory database.
+- A GET request is made to `/games/<game_id>` with the ID of the newly created game.
+- The response status code is checked to be `200`.
+- The response JSON is checked for the presence of `board`, `turn`, `winner`, and `moves` fields.
+
+**Outcome:** The test case passes if the response status code is `200` and contains the expected fields.
+
+#### Test Case 3: `test_get_nonexistent_game`
+**Objective:** Verify that the `/games/<int:game_id>` endpoint returns a `404 Not Found` status code when a request is made for a game that does not exist.
+
+**Expected Outcome:** 
+- The status code returned is `404 Not Found`.
+
+**Test Execution:**
+- A GET request is made to `/games/<nonexistent_game_id>`, where `<nonexistent_game_id>` is an ID that does not correspond to any existing game.
+- The response status code is checked to be `404`.
+
+**Outcome:** The test case passes if the response status code is `404`.
+
+### Summary
+- **Test Cases Executed:** 3
+- **Passed:** 3
+- **Failed:** 0
+- **Skipped:** 0
+
+#### Notes:
+- The test cases are designed to test the basic functionality of creating and retrieving a game for a Flask-based Tic Tac Toe backend.
+- The use of an in-memory database ensures that tests do not affect the actual database and that each test starts with a clean slate.
+- The test cases validate that the API endpoints behave as expected for both successful and unsuccessful operations (like requesting a game that does not exist).
+
+This summary provides a high-level overview of the test cases' outcomes, ensuring that the basic functionalities of game creation and retrieval are functioning as expected in the Python Flask backend environment.
